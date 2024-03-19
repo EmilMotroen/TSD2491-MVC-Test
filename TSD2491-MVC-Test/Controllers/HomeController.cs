@@ -17,12 +17,12 @@ namespace TSD2491_MVC_Test.Controllers
 
         public IActionResult Index()
         {
-            var model = new MatchingGameModel()
-            {
-                ShuffledAnimals = GetShuffledAnimals(),
-                MatchesFound = GetMatchesFound(),
-                TimeDisplay = GetTimeDisplay()
-            };
+            //var model = new MatchingGameModel()
+            //{
+            //    ShuffledAnimals = GetShuffledAnimals(),
+            //    MatchesFound = GetMatchesFound(),
+            //    TimeDisplay = GetTimeDisplay()
+            //};
 
             return View(model);
         }
@@ -47,15 +47,13 @@ namespace TSD2491_MVC_Test.Controllers
             return model.TimeDisplay;
         }
 
+
         [HttpPost]
         public IActionResult ButtonClick(string animal, string uniqueDescription)
         {
-            model.MatchesFound++;
-            //model.ButtonClick(animal, uniqueDescription);
+            model.ButtonClick(animal, uniqueDescription);
             
             return RedirectToAction("Index", model);
-
-
         }
 
         public IActionResult Privacy()

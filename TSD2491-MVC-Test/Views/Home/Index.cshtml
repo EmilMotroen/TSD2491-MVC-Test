@@ -27,6 +27,9 @@
             <div class="col-3">
                 @using (Html.BeginForm("ButtonClick", "Home", FormMethod.Post))
                 {
+                    
+                    <input type="hidden" name="animal" value="@animal"/>
+                    <input type="hidden" name="uniqueDescription" value="@uniqueDescription"/>
                     <input type="submit" value="@animal" class="button"/>
                 }
             </div>
@@ -39,7 +42,3 @@
         <h2>Time: <span id="time-display">@Model.TimeDisplay</span></h2>
     </div>
 </div>
-
-@section Scripts {
-    <script src="~/js/site.js"></script>
-}

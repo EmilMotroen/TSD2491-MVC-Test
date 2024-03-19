@@ -42,11 +42,11 @@ namespace TSD2491_MVC_Test.Models
             return ShuffledAnimals = animalEmoji.OrderBy(item => random.Next()).ToList();
         }
 
-        public List<string> ButtonClick(string animal, string animalDescription)
-        {
-            string lastAnimalFound = string.Empty;
-            string lastDescription = string.Empty;
+        public string lastAnimalFound = string.Empty;
+        public string lastDescription = string.Empty;
 
+        public void ButtonClick(string animal, string animalDescription)
+        {
             if (lastAnimalFound == string.Empty)
             {
                 lastAnimalFound = animal;
@@ -78,8 +78,6 @@ namespace TSD2491_MVC_Test.Models
                 // Reset selection.
                 lastAnimalFound = string.Empty;
             }
-
-            return ShuffledAnimals;
         }
     }
 }
