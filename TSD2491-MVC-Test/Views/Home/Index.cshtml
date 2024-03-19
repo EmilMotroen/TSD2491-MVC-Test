@@ -19,17 +19,16 @@
 <h2>TSD2491 - Oblig 1</h2>
 
 <div class="container">
-    @Model.SetupGame();
     <div class="row">
         @for (var animalNumber = 0; animalNumber < Model.ShuffledAnimals.Count; animalNumber++)
         {
             var animal = Model.ShuffledAnimals[animalNumber];
             var uniqueDescription = $"Button #{animalNumber}";
             <div class="col-3">
-                <button type="button" class="btn btn-outline-dark animal-button"
-                        data-animal="@animal" data-description="@uniqueDescription">
-                    <h1>@animal</h1>
-                </button>
+                @using (Html.BeginForm("ButtonClick", "Home", FormMethod.Post))
+                {
+                    <input type="submit" value="@animal" class="button"/>
+                }
             </div>
         }
     </div>

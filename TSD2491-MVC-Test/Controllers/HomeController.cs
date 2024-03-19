@@ -50,15 +50,10 @@ namespace TSD2491_MVC_Test.Controllers
         [HttpPost]
         public IActionResult ButtonClick(string animal, string uniqueDescription)
         {
-            model.ButtonClick(animal, uniqueDescription);
-            var response = new
-            {
-                MatchesFound = GetMatchesFound(),
-                TimeDisplay = GetTimeDisplay()
-            };
-
-            //return Json(response);
-            return RedirectToAction("Index");
+            model.MatchesFound++;
+            //model.ButtonClick(animal, uniqueDescription);
+            
+            return RedirectToAction("Index", model);
 
 
         }

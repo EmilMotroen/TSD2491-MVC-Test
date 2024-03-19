@@ -1,10 +1,13 @@
-﻿namespace TSD2491_MVC_Test.Models
+﻿using System;
+
+namespace TSD2491_MVC_Test.Models
 {
     public class MatchingGameModel
     {
+        static Random random = new Random();
         public int MatchesFound = 0;
         public int TimeDisplay = 0;
-        public List<string> animalEmoji = new List<string>()
+        public static List<string> animalEmoji = new List<string>()
         {
             "🐺", "🐺",
             "🦖", "🦖",
@@ -16,7 +19,7 @@
             "🐢", "🐢"
         };
 
-        public List<string> ShuffledAnimals = new List<string>();
+        public List<string> ShuffledAnimals= animalEmoji.OrderBy(item => random.Next()).ToList();
 
         public List<string> GetShuffledAnimals()
         {
@@ -36,7 +39,6 @@
         public List<string> SetupGame()
         {
             MatchesFound = 0;
-            Random random = new Random();
             return ShuffledAnimals = animalEmoji.OrderBy(item => random.Next()).ToList();
         }
 
