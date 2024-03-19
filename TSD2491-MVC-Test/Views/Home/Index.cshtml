@@ -1,0 +1,46 @@
+﻿@model TSD2491_MVC_Test.Models.MatchingGameModel
+@{
+    ViewData["Title"] = "Matching Game";
+}
+
+<style>
+    .container {
+        width: 400px;
+    }
+
+    button {
+        width: 100px;
+        height: 100px;
+        font-size: 50px;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+<h2>TSD2491 - Oblig 1</h2>
+
+<div class="container">
+    @Model.SetupGame();
+    <div class="row">
+        @for (var animalNumber = 0; animalNumber < Model.ShuffledAnimals.Count; animalNumber++)
+        {
+            var animal = Model.ShuffledAnimals[animalNumber];
+            var uniqueDescription = $"Button #{animalNumber}";
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-dark animal-button"
+                        data-animal="@animal" data-description="@uniqueDescription">
+                    <h1>@animal</h1>
+                </button>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <h2>Matches found: <span id="matches-found">@Model.MatchesFound</span></h2>
+    </div>
+    <div class="row">
+        <h2>Time: <span id="time-display">@Model.TimeDisplay</span></h2>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}
