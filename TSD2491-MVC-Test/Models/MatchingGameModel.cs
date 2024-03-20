@@ -4,13 +4,13 @@ namespace TSD2491_MVC_Test.Models
 {
     public class MatchingGameModel
     {
-        static Random random = new Random();
+        private readonly static Random random = new Random();
         private int matchesFound = 0;
 
         private bool gameFinished = false;
 
         private const string GameRunningText = "Match as fast as you can!";
-        private const string GameWonText = "Game Complete";
+        private const string GameWonText = "Game Complete!";
 
         private readonly static List<string> animalEmoji = new List<string>()
         {
@@ -76,7 +76,6 @@ namespace TSD2491_MVC_Test.Models
         public List<string> SetupGame()
         {
             matchesFound = 0;
-            gameFinished = false;
             return ShuffledEmoji = PickRandomEmoji();
         }
 
