@@ -20,9 +20,9 @@
 
 <div class="container">
     <div class="row">
-        @for (var animalNumber = 0; animalNumber < Model.ShuffledAnimals.Count; animalNumber++)
+        @for (var animalNumber = 0; animalNumber < Model.ShuffledEmoji.Count; animalNumber++)
         {
-            var animal = Model.ShuffledAnimals[animalNumber];
+            var animal = Model.ShuffledEmoji[animalNumber];
             var uniqueDescription = $"Button #{animalNumber}";
             <div class="col-3">
                 @using (Html.BeginForm("ButtonClick", "Home", FormMethod.Post))
@@ -30,7 +30,7 @@
                     
                     <input type="hidden" name="animal" value="@animal"/>
                     <input type="hidden" name="uniqueDescription" value="@uniqueDescription"/>
-                    <input type="submit" value="@animal" class="button"/>
+                    <input type="submit" value="@animal" class=" btn button"/>
                 }
             </div>
         }

@@ -19,11 +19,35 @@ namespace TSD2491_MVC_Test.Models
             "🐢", "🐢"
         };
 
-        public List<string> ShuffledAnimals= animalEmoji.OrderBy(item => random.Next()).ToList();
+        public static List<string> itemEmoji = new List<string>()
+        {
+            "⌚️", "⌚️",
+            "📽", "📽",
+            "🔮", "🔮",
+            "🖋", "🖋",
+            "🎈", "🎈",
+            "🧻", "🧻",
+            "🧬", "🧬",
+            "🔬", "🔬"
+        };
+
+        public static List<string> travelEmoji = new List<string>()
+        {
+            "🚲", "🚲",
+            "🎡", "🎡",
+            "⛩", "⛩",
+            "🌠", "🌠",
+            "🎠", "🎠",
+            "⛪️", "⛪️",
+            "🌌", "🌌",
+            "🗾", "🗾"
+        };
+
+        public List<string> ShuffledEmoji = animalEmoji.OrderBy(item => random.Next()).ToList();
 
         public List<string> GetShuffledAnimals()
         {
-            return ShuffledAnimals;
+            return ShuffledEmoji;
         }
 
         public int GetMatchesFound()
@@ -39,7 +63,18 @@ namespace TSD2491_MVC_Test.Models
         public List<string> SetupGame()
         {
             MatchesFound = 0;
-            return ShuffledAnimals = animalEmoji.OrderBy(item => random.Next()).ToList();
+            return ShuffledEmoji = PickRandomEmoji();
+        }
+
+        public List<string> PickRandomEmoji()
+        {
+            int emoji = random.Next(0, 3);
+            switch (emoji)
+            {
+                case 0: return animalEmoji.OrderBy(item => random.Next()).ToList();
+                case 1: return itemEmoji.OrderBy(item => random.Next()).ToList();
+                default: return travelEmoji.OrderBy(item => random.Next()).ToList();
+            }
         }
 
         public string lastAnimalFound = string.Empty;
@@ -59,7 +94,7 @@ namespace TSD2491_MVC_Test.Models
                 lastAnimalFound = string.Empty;
 
                 // Replace found animals with empty string to hide them.
-                ShuffledAnimals = ShuffledAnimals
+                ShuffledEmoji = ShuffledEmoji
                     .Select(a => a.Replace(animal, string.Empty))
                     .ToList();
 
