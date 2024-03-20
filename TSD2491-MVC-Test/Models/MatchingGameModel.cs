@@ -76,6 +76,7 @@ namespace TSD2491_MVC_Test.Models
         public List<string> SetupGame()
         {
             matchesFound = 0;
+            gameFinished = false;
             return ShuffledEmoji = PickRandomEmoji();
         }
 
@@ -95,6 +96,7 @@ namespace TSD2491_MVC_Test.Models
 
         public void ButtonClick(string emoji, string emojiDescription)
         {
+            gameFinished = false;
             if (lastEmojiFound == string.Empty)
             {
                 lastEmojiFound = emoji;
