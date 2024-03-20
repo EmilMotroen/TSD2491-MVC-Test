@@ -49,9 +49,9 @@ namespace TSD2491_MVC_Test.Controllers
 
 
         [HttpPost]
-        public IActionResult ButtonClick(string animal, string uniqueDescription)
+        public IActionResult ButtonClick(string emoji, string uniqueDescription)
         {
-            model.ButtonClick(animal, uniqueDescription);
+            model.ButtonClick(emoji, uniqueDescription);
             
             return RedirectToAction("Index", model);
         }

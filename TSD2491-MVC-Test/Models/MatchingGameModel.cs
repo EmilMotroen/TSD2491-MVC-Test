@@ -77,25 +77,25 @@ namespace TSD2491_MVC_Test.Models
             }
         }
 
-        public string lastAnimalFound = string.Empty;
+        public string lastEmojiFound = string.Empty;
         public string lastDescription = string.Empty;
 
-        public void ButtonClick(string animal, string animalDescription)
+        public void ButtonClick(string emoji, string emojiDescription)
         {
-            if (lastAnimalFound == string.Empty)
+            if (lastEmojiFound == string.Empty)
             {
-                lastAnimalFound = animal;
-                lastDescription = animalDescription;
+                lastEmojiFound = emoji;
+                lastDescription = emojiDescription;
 
             }
-            else if ((lastAnimalFound == animal) && (animalDescription != lastDescription))
+            else if ((lastEmojiFound == emoji) && (emojiDescription != lastDescription))
             {
                 // Match found! Reset for next pair.
-                lastAnimalFound = string.Empty;
+                lastEmojiFound = string.Empty;
 
                 // Replace found animals with empty string to hide them.
                 ShuffledEmoji = ShuffledEmoji
-                    .Select(a => a.Replace(animal, string.Empty))
+                    .Select(a => a.Replace(emoji, string.Empty))
                     .ToList();
 
                 MatchesFound++;
@@ -111,7 +111,7 @@ namespace TSD2491_MVC_Test.Models
             {
                 // User selected a pair that don't match.
                 // Reset selection.
-                lastAnimalFound = string.Empty;
+                lastEmojiFound = string.Empty;
             }
         }
     }
