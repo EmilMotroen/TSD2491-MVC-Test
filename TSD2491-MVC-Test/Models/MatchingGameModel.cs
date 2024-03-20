@@ -5,9 +5,12 @@ namespace TSD2491_MVC_Test.Models
     public class MatchingGameModel
     {
         static Random random = new Random();
-        public int MatchesFound = 0;
-        public int TimeDisplay = 0;
-        public static List<string> animalEmoji = new List<string>()
+        private int matchesFound = 0;
+
+        private const string GameRunningText = "Match as fast as you can!";
+        private const string GameWonText = "Game Complete";
+
+        private readonly static List<string> animalEmoji = new List<string>()
         {
             "🐺", "🐺",
             "🦖", "🦖",
@@ -18,8 +21,7 @@ namespace TSD2491_MVC_Test.Models
             "🦈", "🦈",
             "🐢", "🐢"
         };
-
-        public static List<string> itemEmoji = new List<string>()
+        private readonly static List<string> itemEmoji = new List<string>()
         {
             "⌚️", "⌚️",
             "📽", "📽",
@@ -30,8 +32,7 @@ namespace TSD2491_MVC_Test.Models
             "🧬", "🧬",
             "🔬", "🔬"
         };
-
-        public static List<string> travelEmoji = new List<string>()
+        private readonly static List<string> travelEmoji = new List<string>()
         {
             "🚲", "🚲",
             "🎡", "🎡",
@@ -52,33 +53,38 @@ namespace TSD2491_MVC_Test.Models
 
         public int GetMatchesFound()
         {
-            return MatchesFound;
+            return matchesFound;
         }
 
-        public int GetTimeDisplay()
+        public string GetGameRunningText()
         {
-            return TimeDisplay;
+            return GameRunningText;
+        }
+
+        public string GetGameFinishedText()
+        {
+            return GameWonText;
         }
 
         public List<string> SetupGame()
         {
-            MatchesFound = 0;
+            matchesFound = 0;
             return ShuffledEmoji = PickRandomEmoji();
         }
 
-        public List<string> PickRandomEmoji()
+        private static List<string> PickRandomEmoji()
         {
             int emoji = random.Next(0, 3);
             switch (emoji)
             {
-                case 0: return animalEmoji.OrderBy(item => random.Next()).ToList();
-                case 1: return itemEmoji.OrderBy(item => random.Next()).ToList();
+                case 0:  return animalEmoji.OrderBy(item => random.Next()).ToList();
+                case 1:  return itemEmoji.OrderBy(item => random.Next()).ToList();
                 default: return travelEmoji.OrderBy(item => random.Next()).ToList();
             }
         }
 
-        public string lastEmojiFound = string.Empty;
-        public string lastDescription = string.Empty;
+        private string lastEmojiFound = string.Empty;
+        private string lastDescription = string.Empty;
 
         public void ButtonClick(string emoji, string emojiDescription)
         {
@@ -98,12 +104,9 @@ namespace TSD2491_MVC_Test.Models
                     .Select(a => a.Replace(emoji, string.Empty))
                     .ToList();
 
-                MatchesFound++;
-                if (MatchesFound == 8)
+                matchesFound++;
+                if (matchesFound == 8)
                 {
-                    //timer.Stop();
-                    //timeDisplay += " - Play Again?";
-
                     SetupGame();
                 }
             }
