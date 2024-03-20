@@ -7,6 +7,8 @@ namespace TSD2491_MVC_Test.Models
         static Random random = new Random();
         private int matchesFound = 0;
 
+        private bool gameFinished = false;
+
         private const string GameRunningText = "Match as fast as you can!";
         private const string GameWonText = "Game Complete";
 
@@ -49,6 +51,11 @@ namespace TSD2491_MVC_Test.Models
         public List<string> GetShuffledAnimals()
         {
             return ShuffledEmoji;
+        }
+
+        public bool GetGameFinished()
+        {
+            return gameFinished;
         }
 
         public int GetMatchesFound()
@@ -108,6 +115,7 @@ namespace TSD2491_MVC_Test.Models
                 if (matchesFound == 8)
                 {
                     SetupGame();
+                    gameFinished = true;
                 }
             }
             else
