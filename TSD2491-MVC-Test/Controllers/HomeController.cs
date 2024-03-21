@@ -46,8 +46,6 @@ namespace TSD2491_MVC_Test.Controllers
 
         public IActionResult GetUserAndScore()
         {
-            
-
             return View("Index", model.CountGamesPlayed);
         }
 
