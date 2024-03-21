@@ -54,22 +54,25 @@
             <h3> <span id="game-running-text">@Model.GetGameRunningText()</span></h3>
         }
     </div>
-    <!--Name: @ViewBag.Username;-->
-        @using (Html.BeginForm("SaveUsername", "Home", FormMethod.Post)){
-            <p>Enter Name: </p>
-            @Html.TextBoxFor(model => model.Username)
-            <input type="submit" value="Submit"  class="submitButton"/>
-        }
-    <div>
-        @if (string.IsNullOrEmpty(Model.Username)) { }    
-        else
-        {
-            //var lines = Model.CountGamesPlayed.Select(kvp => $"{kvp.Key}:{kvp.Value}");
-            <p><span id="name-of-player"></span></p>
-            @foreach(var item in Model.SortedDict())
+    <div class="row">
+        <div class"row">
+            @if (string.IsNullOrEmpty(Model.Username)) { }    
+            else
             {
-                <p>@item.Key: @item.Value</p>
+                <h3><span id="name-of-player">Players who have played the most games:</span></h3>
+                @foreach(var item in Model.SortedDict())
+                {
+                    <h4>@item.Key: @item.Value</h4>
+                }
             }
-        }
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("SaveUsername", "Home", FormMethod.Post))
+            {
+                <p>Enter Name: </p>
+                @Html.TextBoxFor(model => model.Username)
+                <input type="submit" value="Submit" class="submitButton" />
+            }
+        </div>
     </div>
 </div>

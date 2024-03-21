@@ -57,7 +57,7 @@ namespace TSD2491_MVC_Test.Models
         {
             if (CountGamesPlayed.Count == 0)
             {
-                return null;
+                return [];
             }
             return CountGamesPlayed.OrderByDescending(x => x.Value);
         }
@@ -126,7 +126,7 @@ namespace TSD2491_MVC_Test.Models
                 // Match found! Reset for next pair.
                 lastEmojiFound = string.Empty;
 
-                // Replace found animals with empty string to hide them.
+                // Replace found emoji with empty string to hide them.
                 ShuffledEmoji = ShuffledEmoji
                     .Select(a => a.Replace(emoji, string.Empty))
                     .ToList();
