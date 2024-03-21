@@ -52,6 +52,15 @@ namespace TSD2491_MVC_Test.Models
         public int GamesPlayed { get; set; }
 
         public Dictionary<string, int>? CountGamesPlayed = new Dictionary<string, int>();
+        
+        public IEnumerable<KeyValuePair<string, int>> SortedDict()
+        {
+            if (CountGamesPlayed.Count == 0)
+            {
+                return null;
+            }
+            return CountGamesPlayed.OrderByDescending(x => x.Value);
+        }
 
         public List<string> GetShuffledAnimals()
         {
@@ -127,6 +136,13 @@ namespace TSD2491_MVC_Test.Models
                 {
                     SetupGame();
                     gameFinished = true;
+                    if (!string.IsNullOrEmpty(Username))
+                    {
+                        if (CountGamesPlayed.ContainsKey(Username))
+                        {
+                            CountGamesPlayed[Username]++;
+                        }
+                    }
                 }
             }
             else

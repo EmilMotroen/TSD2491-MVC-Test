@@ -61,15 +61,12 @@
             <input type="submit" value="Submit"  class="submitButton"/>
         }
     <div>
-        @if (string.IsNullOrEmpty(Model.Username))
-        {
-            <p>No name entered</p>
-        }    
+        @if (string.IsNullOrEmpty(Model.Username)) { }    
         else
         {
             //var lines = Model.CountGamesPlayed.Select(kvp => $"{kvp.Key}:{kvp.Value}");
             <p><span id="name-of-player"></span></p>
-            @foreach(var item in Model.CountGamesPlayed)
+            @foreach(var item in Model.SortedDict())
             {
                 <p>@item.Key: @item.Value</p>
             }

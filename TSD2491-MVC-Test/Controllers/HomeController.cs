@@ -30,15 +30,17 @@ namespace TSD2491_MVC_Test.Controllers
         {
             model.ButtonClick(emoji, uniqueDescription);
             
-            return RedirectToAction("Index", model);
+            return View("Index", model);
         }
 
         //TODO: If someone enters a previous name load it the score it got
         [HttpPost]
         public ActionResult SaveUsername()
         {
-            model.CountGamesPlayed.Add(Request.Form["Username"], 0);
             model.Username = Request.Form["Username"];
+            model.GamesPlayed = 0;
+            model.CountGamesPlayed.Add(model.Username, model.GamesPlayed);
+            
             return View("Index", model);
         }
 
