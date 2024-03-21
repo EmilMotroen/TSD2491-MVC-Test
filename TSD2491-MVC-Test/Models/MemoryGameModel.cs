@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace TSD2491_MVC_Test.Models
 {
@@ -52,28 +53,42 @@ namespace TSD2491_MVC_Test.Models
         {
             matchesFound = 0;
             ShuffledEmoji = travelEmoji.OrderBy(item => random.Next()).ToList();
+            HiddenEmoji = Enumerable.Repeat("?", ShuffledEmoji.Count).ToList();
         }
 
         private string lastEmojiFound = string.Empty;
-        private string lastDescription = string.Empty;
+        private int[] numberOfLastEmojies = new int[2];
+        private int click = 0;
+        string emojiOne = string.Empty;
+        string emojiTwo = string.Empty;
         public void ButtonClick(string emoji, string emojiDescription)
         {
+            if (click == 0)
+            {
+                HiddenEmoji[numberOfLastEmojies[1]] = "?";
+                HiddenEmoji[numberOfLastEmojies[0]] = "?";
+                numberOfLastEmojies[0] = Convert.ToInt32(emojiDescription[8..]);
+                HiddenEmoji[numberOfLastEmojies[0]] = ShuffledEmoji[numberOfLastEmojies[0]].ToString();
+                emojiOne = ShuffledEmoji[numberOfLastEmojies[0]].ToString();
+                click = 1;
+            }
+             else if (click == 1)
+            {
+                numberOfLastEmojies[1] = Convert.ToInt32(emojiDescription[8..]);
+                HiddenEmoji[numberOfLastEmojies[1]] = ShuffledEmoji[numberOfLastEmojies[1]].ToString();
+                emojiTwo = ShuffledEmoji[numberOfLastEmojies[1]].ToString();
+                click = 0;
+            }
+                
             gameFinished = false;
             if (lastEmojiFound == string.Empty)
             {
                 lastEmojiFound = emoji;
-                lastDescription = emojiDescription;
-
             }
-            else if ((lastEmojiFound == emoji) && (emojiDescription != lastDescription))
+            else if ((emojiOne == emojiTwo))
             {
                 // Match found! Reset for next pair.
                 lastEmojiFound = string.Empty;
-
-                // Replace found emoji with empty string to hide them.
-                ShuffledEmoji = ShuffledEmoji
-                    .Select(a => a.Replace(emoji, string.Empty))
-                    .ToList();
 
                 matchesFound++;
                 if (matchesFound == 8)
@@ -87,6 +102,8 @@ namespace TSD2491_MVC_Test.Models
                 // User selected a pair that don't match.
                 // Reset selection.
                 lastEmojiFound = string.Empty;
+                HiddenEmoji[numberOfLastEmojies[1]] = "?";
+                HiddenEmoji[numberOfLastEmojies[0]] = "?";
             }
         }
     }
