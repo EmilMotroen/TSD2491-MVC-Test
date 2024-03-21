@@ -19,12 +19,6 @@ namespace TSD2491_MVC_Test.Controllers
             return View(model);
         }
 
-        public IActionResult ShuffleAnimals()
-        {
-            return View(model.SetupGame());
-        }
-
-
         [HttpPost]
         public IActionResult ButtonClick(string emoji, string uniqueDescription)
         {
@@ -42,16 +36,6 @@ namespace TSD2491_MVC_Test.Controllers
             model.CountGamesPlayed.Add(model.Username, model.GamesPlayed);
             
             return View("Index", model);
-        }
-
-        public IActionResult GetUserAndScore()
-        {
-            return View("Index", model.CountGamesPlayed);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
