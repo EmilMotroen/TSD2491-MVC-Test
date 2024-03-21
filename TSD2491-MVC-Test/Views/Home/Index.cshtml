@@ -1,6 +1,7 @@
 ﻿@model TSD2491_MVC_Test.Models.MatchingGameModel
 @{
     ViewData["Title"] = "Matching Game";
+    
 }
 
 <style>
@@ -13,6 +14,12 @@
         height: 100px;
         font-size: 50px;
     }
+
+    .submitButton {
+        width: 70px;
+        height: 40px;
+        font-size: 15px;
+    }
 </style>
 
 <h1>@ViewData["Title"]</h1>
@@ -20,7 +27,7 @@
 
 <div class="container">
     <div class="row">
-        @for (var emojiNumber = 0; emojiNumber < Model.ShuffledEmoji.Count; emojiNumber++)
+        @for (var emojiNumber = 0; emojiNumber < Model.GetShuffledAnimalsCount(); emojiNumber++)
         {
             var emoji = Model.ShuffledEmoji[emojiNumber];
             var uniqueDescription = $"Button #{emojiNumber}";
@@ -29,7 +36,7 @@
                 {
                     <input type="hidden" name="emoji" value="@emoji" />
                     <input type="hidden" name="uniqueDescription" value="@uniqueDescription" />
-                    <input type="submit" value="@emoji" class=" btn button" />
+                    <input type="submit" value="@emoji" class="btn button" />
                 }
             </div>
         }
@@ -45,6 +52,22 @@
         else
         {
             <h3> <span id="game-running-text">@Model.GetGameRunningText()</span></h3>
+        }
+    </div>
+    Name: @ViewBag.Username;
+        @using (Html.BeginForm("SaveUsername", "Home", FormMethod.Post)){
+            <td>Enter Name: </td>
+            <td>@Html.TextBoxFor(model => model.Username)</td>
+            <td colspan="2"><input type="submit" value="Submit Form" /></td>
+        }
+    <div>
+        @if (string.IsNullOrEmpty(Model.Username))
+        {
+            <p>No name entered</p>    
+        }    
+        else
+        {
+            <p><span id="name-of-player">Name: @Model.Username</span></p>
         }
     </div>
 </div>

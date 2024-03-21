@@ -33,6 +33,14 @@ namespace TSD2491_MVC_Test.Controllers
             return RedirectToAction("Index", model);
         }
 
+        [HttpPost]
+        public ActionResult SaveUsername(MatchingGameModel m)
+        {
+            ViewBag.Username = m.Username;
+            //model.Username = name;
+            return View("Index", model);
+        }
+
         public IActionResult Privacy()
         {
             return View();

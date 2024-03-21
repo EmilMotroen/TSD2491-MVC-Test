@@ -9,8 +9,8 @@ namespace TSD2491_MVC_Test.Models
 
         private bool gameFinished = false;
 
-        private const string GameRunningText = "Match as fast as you can!";
-        private const string GameWonText = "Game Complete!";
+        private const string gameRunningText = "Find the matching emojies!";
+        private const string gameWonText = "Game Complete!";
 
         private readonly static List<string> animalEmoji = new List<string>()
         {
@@ -46,11 +46,18 @@ namespace TSD2491_MVC_Test.Models
             "🗾", "🗾"
         };
 
-        public List<string> ShuffledEmoji = animalEmoji.OrderBy(item => random.Next()).ToList();
+        public List<string> ShuffledEmoji = PickRandomEmoji();
+
+        public string Username { get; set; }
 
         public List<string> GetShuffledAnimals()
         {
             return ShuffledEmoji;
+        }
+
+        public int GetShuffledAnimalsCount()
+        {
+            return ShuffledEmoji.Count;
         }
 
         public bool GetGameFinished()
@@ -65,12 +72,12 @@ namespace TSD2491_MVC_Test.Models
 
         public string GetGameRunningText()
         {
-            return GameRunningText;
+            return gameRunningText;
         }
 
         public string GetGameFinishedText()
         {
-            return GameWonText;
+            return gameWonText;
         }
 
         public List<string> SetupGame()
