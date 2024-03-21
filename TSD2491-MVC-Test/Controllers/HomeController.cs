@@ -33,11 +33,20 @@ namespace TSD2491_MVC_Test.Controllers
             return RedirectToAction("Index", model);
         }
 
+        //TODO: If someone enters a previous name load it the score it got
         [HttpPost]
         public ActionResult SaveUsername()
         {
+            model.CountGamesPlayed.Add(Request.Form["Username"], 0);
             model.Username = Request.Form["Username"];
             return View("Index", model);
+        }
+
+        public IActionResult GetUserAndScore()
+        {
+            
+
+            return View("Index", model.CountGamesPlayed);
         }
 
         public IActionResult Privacy()

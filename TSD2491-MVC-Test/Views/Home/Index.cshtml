@@ -63,11 +63,16 @@
     <div>
         @if (string.IsNullOrEmpty(Model.Username))
         {
-            <p>No name entered</p>    
+            <p>No name entered</p>
         }    
         else
         {
-            <p><span id="name-of-player">Name entered: @Model.Username</span></p>
+            //var lines = Model.CountGamesPlayed.Select(kvp => $"{kvp.Key}:{kvp.Value}");
+            <p><span id="name-of-player"></span></p>
+            @foreach(var item in Model.CountGamesPlayed)
+            {
+                <p>@item.Key: @item.Value</p>
+            }
         }
     </div>
 </div>

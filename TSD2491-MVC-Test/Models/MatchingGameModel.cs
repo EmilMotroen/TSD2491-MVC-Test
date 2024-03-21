@@ -49,6 +49,9 @@ namespace TSD2491_MVC_Test.Models
         public List<string> ShuffledEmoji = PickRandomEmoji();
 
         public string Username { get; set; }
+        public int GamesPlayed { get; set; }
+
+        public Dictionary<string, int>? CountGamesPlayed = new Dictionary<string, int>();
 
         public List<string> GetShuffledAnimals()
         {
