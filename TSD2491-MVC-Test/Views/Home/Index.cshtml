@@ -54,11 +54,11 @@
             <h3> <span id="game-running-text">@Model.GetGameRunningText()</span></h3>
         }
     </div>
-    Name: @ViewBag.Username;
+    <!--Name: @ViewBag.Username;-->
         @using (Html.BeginForm("SaveUsername", "Home", FormMethod.Post)){
-            <td>Enter Name: </td>
-            <td>@Html.TextBoxFor(model => model.Username)</td>
-            <td colspan="2"><input type="submit" value="Submit Form" /></td>
+            <p>Enter Name: </p>
+            @Html.TextBoxFor(model => model.Username)
+            <input type="submit" value="Submit"  class="submitButton"/>
         }
     <div>
         @if (string.IsNullOrEmpty(Model.Username))
@@ -67,7 +67,7 @@
         }    
         else
         {
-            <p><span id="name-of-player">Name: @Model.Username</span></p>
+            <p><span id="name-of-player">Name entered: @Model.Username</span></p>
         }
     </div>
 </div>

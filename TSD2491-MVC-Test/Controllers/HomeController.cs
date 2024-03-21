@@ -34,10 +34,9 @@ namespace TSD2491_MVC_Test.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveUsername(MatchingGameModel m)
+        public ActionResult SaveUsername()
         {
-            ViewBag.Username = m.Username;
-            //model.Username = name;
+            model.Username = Request.Form["Username"];
             return View("Index", model);
         }
 
