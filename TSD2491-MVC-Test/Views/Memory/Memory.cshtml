@@ -18,9 +18,9 @@
 <h1>@ViewData["Title"]</h1>
 <div class="container">
     <div class="row">
-        @for (var emojiNumber = 0; emojiNumber < Model.ShuffledEmoji.Count; emojiNumber++)
+        @for (var emojiNumber = 0; emojiNumber < Model.HiddenEmoji.Count; emojiNumber++)
         {
-            var emoji = Model.ShuffledEmoji[emojiNumber];
+            var emoji = Model.HiddenEmoji[emojiNumber];
             var uniqueDescription = $"Button #{emojiNumber}";
             <div class="col-3">
                 @using (Html.BeginForm("ButtonClick", "Memory", FormMethod.Post))

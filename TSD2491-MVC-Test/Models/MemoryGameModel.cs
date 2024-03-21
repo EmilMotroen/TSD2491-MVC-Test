@@ -25,7 +25,8 @@ namespace TSD2491_MVC_Test.Models
             "🗾", "🗾"
         };
 
-        public List<string> ShuffledEmoji = travelEmoji.OrderBy(item => random.Next()).ToList();
+        private static List<string> ShuffledEmoji = travelEmoji.OrderBy(item => random.Next()).ToList();
+        public List<string> HiddenEmoji = Enumerable.Repeat("?", ShuffledEmoji.Count).ToList();
 
         public bool GetGameFinished()
         {
@@ -47,9 +48,46 @@ namespace TSD2491_MVC_Test.Models
             return gameWonText;
         }
 
-        public void ButtonClick(string emoji, string uniqueDescription)
+        public void SetupGame()
         {
-            throw new NotImplementedException();
+            matchesFound = 0;
+            ShuffledEmoji = travelEmoji.OrderBy(item => random.Next()).ToList();
+        }
+
+        private string lastEmojiFound = string.Empty;
+        private string lastDescription = string.Empty;
+        public void ButtonClick(string emoji, string emojiDescription)
+        {
+            gameFinished = false;
+            if (lastEmojiFound == string.Empty)
+            {
+                lastEmojiFound = emoji;
+                lastDescription = emojiDescription;
+
+            }
+            else if ((lastEmojiFound == emoji) && (emojiDescription != lastDescription))
+            {
+                // Match found! Reset for next pair.
+                lastEmojiFound = string.Empty;
+
+                // Replace found emoji with empty string to hide them.
+                ShuffledEmoji = ShuffledEmoji
+                    .Select(a => a.Replace(emoji, string.Empty))
+                    .ToList();
+
+                matchesFound++;
+                if (matchesFound == 8)
+                {
+                    SetupGame();
+                    gameFinished = true;
+                }
+            }
+            else
+            {
+                // User selected a pair that don't match.
+                // Reset selection.
+                lastEmojiFound = string.Empty;
+            }
         }
     }
 }

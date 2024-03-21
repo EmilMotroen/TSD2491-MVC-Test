@@ -16,7 +16,7 @@ namespace TSD2491_MVC_Test.Controllers
         {
             model.ButtonClick(emoji, uniqueDescription);
 
-            return View("Index", model);
+            return View("Memory", model);
         }
     }
 }
